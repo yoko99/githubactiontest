@@ -2,6 +2,6 @@ name: leas-github-actions
 on: [push]
 jobs:
   check-bats-version:
-    rus-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - run: echo "this is pen"
