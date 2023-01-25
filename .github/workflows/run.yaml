@@ -1,7 +1,20 @@
-name: leas-github-actions
-on: [push]
+name: CI
+
+on: [push, pull_request]
+
 jobs:
-  check-bats-version:
+  industrial_ci:
+    strategy:
+      matrix:
+        env:
+          - {ROS_DISTRO: "kinetic",
+            ROS_REPO: "main",
+            CATKIN_LINT: "true",
+            OPT_VI: "-vi",
+            CATKIN_LINT_ARGS: "--ignore unknown_package"}
+
     runs-on: ubuntu-latest
     steps:
-      - run: echo "this is pen"
+      - uses: actions/checkout@v2
+      - uses: 'ros-industrial/industrial_ci@master'
+        env: ${{matrix.env}}
